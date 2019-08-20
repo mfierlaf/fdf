@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   get_high.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfierlaf <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/19 14:08:51 by mfierlaf          #+#    #+#             */
-/*   Updated: 2019/08/20 15:54:26 by mfierlaf         ###   ########.fr       */
+/*   Created: 2019/08/20 14:23:45 by mfierlaf          #+#    #+#             */
+/*   Updated: 2019/08/20 14:44:34 by mfierlaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
-#include "./minilibx_macos/mlx.h"
+#include "fdf.h"
 
-typedef struct	s_brsh;
+int		get_high(t_file file, int x, int y)
 {
-	int dx;
-	int sx;
-	int dy;
-	int sy;
-	int err;
-	int e2;
-}				t_brsh;
+	int cpt;
+	int i;
+	int ret;
 
-typedef struct	s_file;
-{
-	int x;
-	int y;
-	char *high;
-}				t_file;
-
-#endif
+	i = 0;
+	cpt = 0;
+	ret = 0;
+	while (file->high[i] != '\0')
+	{
+		if ((isdigit(file->high[i]) == 1) && file->high[i + 1] == " ")
+			cpt++;
+		if (cpt == (x + (y * file->y)))
+		{
+			ret = ft_atoi(file->high[i]);
+			break;
+		}
+		i++;
+	}
+	return (ret);
+}
